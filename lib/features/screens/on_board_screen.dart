@@ -2,6 +2,7 @@ import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:flutter_segment/flutter_segment.dart';
+import 'package:fusecash/common/globals.dart';
 import 'package:fusecash/features/onboard/widegts/create_or_restore.dart';
 import 'package:fusecash/generated/i18n.dart';
 import 'package:fusecash/models/app_state.dart';
@@ -46,6 +47,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     );
   }
 
+  int currentPage = -1;
+
   @override
   Widget build(BuildContext context) {
     List<Widget> welcomeScreens = [
@@ -70,6 +73,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       distinct: true,
       converter: SplashViewModel.fromStore,
       builder: (_, viewModel) {
+
         return Scaffold(
           body: Container(
             child: Column(
@@ -77,26 +81,42 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 Expanded(
                   flex: 20,
                   child: Container(
+
                     child: Stack(
                       children: <Widget>[
                         Padding(
                           padding: EdgeInsets.only(
-                            bottom: 100,
+                            bottom: 50,
                             left: 20,
                             right: 20,
                           ),
-                          child: FlareActor(
+                          child: currentPage == 3?Center(
+                            child: Container(
+                              width: 200,
+                              height: 200,
+                              child: Image.asset(
+                                'assets/images/sergio-icon.png',
+                                fit: BoxFit.contain,
+                              ),
+                            ),
+                          ):FlareActor(
                             "assets/images/animation.flr",
                             alignment: Alignment.center,
                             fit: BoxFit.contain,
                             controller: _slideController,
-                          ),
+                          )
                         ),
                         PageView.builder(
                           physics: AlwaysScrollableScrollPhysics(),
                           controller: _pageController,
                           itemCount: welcomeScreens.length,
                           itemBuilder: (_, index) => welcomeScreens[index % 4],
+                          onPageChanged: (value) {
+                            currentPage = value;
+                            setState(() {
+
+                            });
+                          },
                         ),
                         Positioned(
                           bottom: 15.0,
@@ -111,7 +131,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                 effect: JumpingDotEffect(
                                     dotWidth: 9.0,
                                     dotHeight: 9.0,
-                                    activeDotColor: Color(0xFF696B6D)),
+                                    activeDotColor: themePink),
                                 onDotClicked: gotoPage,
                               ),
                             ),

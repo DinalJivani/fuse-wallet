@@ -31,17 +31,19 @@ class _CreateWalletState extends State<CreateWallet> {
         builder: (_, viewModel) {
           return Container(
             padding: EdgeInsets.only(bottom: 80),
+
             child: Column(
               mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
-                PrimaryButton(
+                PrimaryButtonPink(
                   disabled: isPrimaryPreloading,
                   label: viewModel.isLoggedOut
                       ? I18n.of(context).login
                       : I18n.of(context).create_new_wallet,
                   onPressed: () async {
+
                     if (viewModel.isLoggedOut) {
                       viewModel.loginAgain();
                       if (ExtendedNavigator.root.canPop()) {
@@ -73,6 +75,7 @@ class _CreateWalletState extends State<CreateWallet> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
+                              //Restore backup
                               TransparentButton(
                                   fontSize: 14,
                                   label: I18n.of(context).restore_backup,
@@ -85,6 +88,7 @@ class _CreateWalletState extends State<CreateWallet> {
                                   color: Color(0xFFB2B2B2),
                                 ),
                               ),
+                              //Create wallet
                               TransparentButton(
                                   fontSize: 14,
                                   label: I18n.of(context).create__wallet,

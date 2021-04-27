@@ -1,6 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:flutter_segment/flutter_segment.dart';
+import 'package:fusecash/common/router/routes.gr.dart';
 import 'package:fusecash/generated/i18n.dart';
 import 'package:fusecash/models/app_state.dart';
 import 'package:fusecash/utils/log/log.dart';
@@ -140,6 +142,14 @@ class _VerifyScreenState extends State<VerifyScreen> {
                           label: I18n.of(context).next_button,
                           preload: viewModel.isVerifyRequest,
                           onPressed: () {
+
+                            // //ABHI
+                            // if (ExtendedNavigator.root.canPop()) {
+                            //   ExtendedNavigator.root.popUntilRoot();
+                            // }
+                            // ExtendedNavigator.root.replace(Routes.homeScreen);
+                            // return;
+
                             formKey.currentState.validate();
                             // conditions for validating
                             log.info(
